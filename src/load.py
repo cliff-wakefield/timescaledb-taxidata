@@ -97,7 +97,7 @@ if __name__ == "__main__":
     green_files = glob("./data/green_tripdata_*.parquet")
     green_files = [x for x in green_files if x not in loaded]
 
-    with Pool(concurrency) as p:
+    with Pool(processes=concurrency, maxtasksperchild=1) as p:
         p.map(handle_yellow, yellow_files)
         p.map(handle_green, green_files)
 
